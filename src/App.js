@@ -10,11 +10,14 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import { useState, useEffect } from 'react'
 
+
+
 function App() {
    // State setup
    const [data, setData] = useState([
       {
          userAddress: "",
+         contractList: localStorage.getItem("contractList") || [],
       },
    ])
 
@@ -24,13 +27,15 @@ function App() {
          const web3 = new Web3(Web3.givenProvider || "http://localhost:7545")
          const network = await web3.eth.net.getNetworkType()
          const accounts = await web3.eth.getAccounts()
-
-         setData({ userAddress: accounts[0] })
+         
+         setData({ 
+            userAddress: accounts[0],
+         })
       }
 
       loadBlockchainData()
    }, [])
-
+   
    return (
       <div className="container mw-100">
          <Header />
@@ -47,7 +52,7 @@ function App() {
                <CollectionList />
                <InputAndSubmit id="collectionNameInput" labelText="Input name: " placeholderText="Input name..." buttonText="Create new collection" />
             </div>
-            <div className="col-3 border-primary border-end"> {/* Strict col-3 to prevent long address from stretching box */}
+            <div className="col border-primary border-end"> {/* Strict col-3 to prevent long address from stretching box */}
                <h1 className="d-flex justify-content-center">Contracts</h1>
 
                <ContractList />
