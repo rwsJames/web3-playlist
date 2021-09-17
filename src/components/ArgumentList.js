@@ -26,10 +26,11 @@ const ArgumentList = ({ listIdToObserve }) => {
         }
 
         initObserver()
-    }, [])
+    }, [listIdToObserve])
 
     const parseContractForFunctionArgs = () => {
-        
+        // We have the currently selected contract and function in local storage
+        // 
     }
 
     return (

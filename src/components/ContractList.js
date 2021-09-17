@@ -40,7 +40,7 @@ const initialiseListFromLocalStorage = (listId, delimiter=", ") => {
 }
 
 const ContractList = ({ listId, inputId }) => {
-    useEffect(() => { initialiseListFromLocalStorage(listId) }, [])
+    useEffect(() => { initialiseListFromLocalStorage(listId) }, [listId])
     
     return (
         <div>

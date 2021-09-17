@@ -56,6 +56,8 @@ function App() {
 
          <h1>Hello</h1>
          <p>Your address: { data.userAddress } on { data.networkName }</p>
+         <p>Please ensure any contracts used are verified on etherscan (other networks tba)</p>
+         <hr />
 
          <div className="row">
             <div className="col-2 border-primary border-end">

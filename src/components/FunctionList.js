@@ -27,7 +27,7 @@ const FunctionList = ({ listIdToObserve }) => {
         }
 
         initObserver()
-    }, []) // The "[]" is to use the effect once
+    }, [listIdToObserve]) // The "[]" is to use the effect once
 
     // Expecting string address
     const parseContractForFunctions = (toParse) => {
@@ -40,7 +40,7 @@ const FunctionList = ({ listIdToObserve }) => {
             // 0 if contract is not verified
             // Could maybe move this check to when the contract is added
             if(fetched.status === "0") {
-                alert("The contract at "+toParse+" has not yet been verified.")
+                alert(fetched.result)
                 document.getElementById("functionList").innerText = ""
             } else {
                 let abi = JSON.parse(fetched.result)
@@ -59,7 +59,7 @@ const FunctionList = ({ listIdToObserve }) => {
                         }
                     }
                 } else {
-                    console.log("ABI get failed")
+                    console.log("ABI get failed.\nThis is likely an issue with etherscan or a lack of an internet connection.")
                 }
             }
         })
