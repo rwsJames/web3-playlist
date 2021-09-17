@@ -1,8 +1,9 @@
-import Web3 from 'web3'
-import { useEffect } from 'react'
-import InputAndSubmit from './InputAndSubmit'
+import PropTypes from 'prop-types'
 import BaseList from './BaseList'
-import PropTypes from "prop-types"
+import InputAndSubmit from './InputAndSubmit'
+
+import { useEffect } from 'react'
+import { createNewListElement } from './BaseList'
 
 const addNewContract = (listId, inputId) => {
     let list = document.getElementById(listId)
@@ -23,39 +24,6 @@ const addNewContract = (listId, inputId) => {
         document.getElementById(inputId).value = ""
         alert("Please enter a valid address.\n" + newAddress + " is not valid.")
     }
-}
-
-export const setAsActive = (el) => {
-    var list = el.parentElement
-
-    // Remove active from elements in list
-    for(let i=0; i<list.childElementCount; i++) {
-        list.children[i].classList.remove("active")
-    }
-
-    // Add class "active" to clicked element
-    el.classList.add("active")
-
-    // Grab the name of the list without the list part
-    let localName = el.parentElement.id.substr(0, el.parentElement.id.length-4)
-    // Change the first letter to uppercase
-    localName = localName.charAt(0).toUpperCase() + localName.substr(1)
-    localName = "active"+localName
-    localStorage.setItem(localName, el.innerText)
-}
-
-
-
-export const createNewListElement = (eleText, eleId="") => {
-    let newLi = document.createElement("LI")
-    
-    newLi.classList = "list-group-item list-group-item-action"
-    newLi.onclick = (e) => setAsActive(e.target)
-    newLi.innerText = eleText
-    newLi.style = "word-wrap: break-word;"
-    newLi.id = eleId
-    
-    return newLi
 }
 
 // Intended for use only as a side-effect
@@ -84,7 +52,6 @@ const ContractList = ({ listId, inputId }) => {
             buttonText="Submit contract address" 
             handleSubmit={ () => addNewContract(listId, inputId) }
             /> : ""}
-            
         </div>
     )
 }

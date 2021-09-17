@@ -1,16 +1,15 @@
 import $ from 'jquery'
-import Web3 from 'web3'
-import { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import BaseList from './BaseList'
-import { createNewListElement, setAsActive } from './ContractList'
 
-const web3 = new Web3(Web3.givenProvider || "http://localhost:7545")
+import { useEffect } from 'react'
+import { createNewListElement } from './BaseList'
 
 const FunctionList = ({ listIdToObserve }) => {
     useEffect(() => {
         // Observer to trigger on changes to the classlist of any child of the given (contract) list 
         const initObserver = () => {
-            // Declare what the observer does on trigger
+            // Declare the observer and what it does on trigger
             let activeContractOberver = new MutationObserver((record) => { 
                 console.log(record.at(-1).target)
                 console.log(record.at(-1).target.innerText)
@@ -49,7 +48,7 @@ const FunctionList = ({ listIdToObserve }) => {
                 
                 if(abi !== "") {
                     let list = document.getElementById("functionList")
-                    // Reset function list
+                    // Clear function list
                     list.innerText = ""
 
                     for(let i=0; i<abi.length; i++) {
@@ -71,6 +70,14 @@ const FunctionList = ({ listIdToObserve }) => {
             <BaseList listId="functionList" />
         </div>
     )
+}
+
+FunctionList.defaultProps = {
+    listIdToObserve: "",
+}
+
+FunctionList.propTypes = {
+    listIdToObserve: PropTypes.string,
 }
 
 export default FunctionList

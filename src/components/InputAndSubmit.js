@@ -1,4 +1,5 @@
-import PropTypes from "prop-types"
+import PropTypes from 'prop-types'
+
 // TODO: Refactor into separate Input and Submit components
 const InputAndSubmit = ({ id, labelText, placeholderText, buttonText, handleChange, handleSubmit }) => {
     return (
